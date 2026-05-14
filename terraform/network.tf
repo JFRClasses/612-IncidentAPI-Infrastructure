@@ -12,6 +12,13 @@ resource "azurerm_subnet" "incident_subnet" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
+resource "azurerm_public_ip" "incident_ip" {
+  name = "612-incident-api-ip-${var.ENVIRONMENT}"
+  resource_group_name = azurerm_resource_group.incident_rg.name
+  location = var.LOCATION
+  allocation_method = "Static"
+}
+
 
 resource "azurerm_network_interface" "incident_nic" {
   name                = "612-nic-incident-api-${var.ENVIRONMENT}"
@@ -22,6 +29,7 @@ resource "azurerm_network_interface" "incident_nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.incident_subnet.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.incident_ip.id
   }
 }
 

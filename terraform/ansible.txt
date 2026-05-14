@@ -1,0 +1,22 @@
+1. Crear la red de docker donde van a correr todos los contenedores
+    docker network create incident-network
+
+2. Crear la estructura de carpetas en el servidor
+    --- /
+        | -- containers
+            | -- postgres
+            | -- redis
+            | -- incident-api
+            | -- wireguard
+
+mkdir -p /containers/postgres
+mkdir -p /containers/redis
+mkdir -p /containers/incident-api
+mkdir -p /containers/wireguard
+
+3. Loguearme al registry de github
+    docker login ghcr.io -u <username> -p <token>
+
+4. Crear los docker-compose.yml y los .env
+
+5. Levantar los contenedores
